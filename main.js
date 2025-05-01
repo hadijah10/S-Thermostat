@@ -142,19 +142,15 @@ const rooms = [
   },
 ];
 
-const warmOverlay= `linear-gradient(
+const coolOverlay= `linear-gradient(
     to bottom,
     rgba(141, 158, 247, 0.2),
     rgba(194, 197, 215, 0.1)
   )`;
 
-const coolOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
+const warmOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
 
 const setInitialOverlay = () => {
-  document.querySelector(
-    ".room"
-  ).style.backgroundImage = `url('${rooms[0].image}')`;
-
   document.querySelector(".room").style.backgroundImage = `${
     rooms[0].currTemp < 25 ? coolOverlay : warmOverlay
   }, url('${rooms[0].image}')`;
