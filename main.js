@@ -10,26 +10,26 @@ const rooms = [
     startTime: '16:30',
     endTime: '20:00',
 
-    setCurrTemp(temp) {
+    setCurrTemp: function(temp) {
       this.currTemp = temp;
     },
 
-    setColdPreset(newCold) {
+    setColdPreset: function(newCold) {
       this.coldPreset = newCold;
     },
 
-    setWarmPreset(newWarm) {
+    setWarmPreset: function(newWarm) {
       this.warmPreset = newWarm;
     },
 
-    decreaseTemp() {
+    decreaseTemp: function() {
       this.currTemp--;
     },
 
-    increaseTemp() {
+    increaseTemp: function() {
       this.currTemp++;
     },
-    toggleAircon() {
+    toggleAircon: function() {
       this.airConditionerOn
         ? (this.airConditionerOn = false)
         : (this.airConditionerOn = true);
@@ -45,26 +45,26 @@ const rooms = [
     startTime: '16:30',
     endTime: '20:00',
 
-    setCurrTemp(temp) {
+    setCurrTemp: function(temp) {
       this.currTemp = temp;
     },
 
-    setColdPreset(newCold) {
+    setColdPreset: function(newCold) {
       this.coldPreset = newCold;
     },
 
-    setWarmPreset(newWarm) {
+    setWarmPreset: function(newWarm) {
       this.warmPreset = newWarm;
     },
 
-    decreaseTemp() {
+    decreaseTemp: function() {
       this.currTemp--;
     },
 
-    increaseTemp() {
+    increaseTemp: function() {
       this.currTemp++;
     },
-    toggleAircon() {
+    toggleAircon: function() {
       this.airConditionerOn
         ? (this.airConditionerOn = false)
         : (this.airConditionerOn = true);
@@ -80,26 +80,26 @@ const rooms = [
     startTime: '16:30',
     endTime: '20:00',
 
-    setCurrTemp(temp) {
+    setCurrTemp: function(temp) {
       this.currTemp = temp;
     },
 
-    setColdPreset(newCold) {
+    setColdPreset: function(newCold) {
       this.coldPreset = newCold;
     },
 
-    setWarmPreset(newWarm) {
+    setWarmPreset: function(newWarm) {
       this.warmPreset = newWarm;
     },
 
-    decreaseTemp() {
+    decreaseTemp: function() {
       this.currTemp--;
     },
 
-    increaseTemp() {
+    increaseTemp: function() {
       this.currTemp++;
     },
-    toggleAircon() {
+    toggleAircon: function() {
       this.airConditionerOn
         ? (this.airConditionerOn = false)
         : (this.airConditionerOn = true);
@@ -115,26 +115,26 @@ const rooms = [
     startTime: '16:30',
     endTime: '20:00',
 
-    setCurrTemp(temp) {
+    setCurrTemp: function(temp) {
       this.currTemp = temp;
     },
 
-    setColdPreset(newCold) {
+    setColdPreset: function(newCold) {
       this.coldPreset = newCold;
     },
 
-    setWarmPreset(newWarm) {
+    setWarmPreset: function(newWarm) {
       this.warmPreset = newWarm;
     },
 
-    decreaseTemp() {
+    decreaseTemp: function() {
       this.currTemp--;
     },
 
-    increaseTemp() {
+    increaseTemp: function() {
       this.currTemp++;
     },
-    toggleAircon() {
+    toggleAircon: function() {
       this.airConditionerOn
         ? (this.airConditionerOn = false)
         : (this.airConditionerOn = true);
