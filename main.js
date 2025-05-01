@@ -199,6 +199,7 @@ document.querySelector(".currentTemp").innerText = `${rooms[0].currTemp}°`;
 // Add new options from rooms array
 rooms.forEach((room) => {
   const option = document.createElement("option");
+  //option value correctly set.
   option.value = room.name;
   option.textContent = room.name;
   roomSelect.appendChild(option);
@@ -228,52 +229,73 @@ roomSelect.addEventListener("change", function () {
   setSelectedRoom(selectedRoom);
 });
 
+//Update the ui for evry room selected
+function updateUI(room,tempType){
+  setIndicatorPoint(room.currTemp);
+  currentTemp.textContent = `${room.currTemp}°`;
+
+  generateRooms();
+
+  setOverlay(room);
+  if(tempType == 'warm'){
+    warmBtn.style.backgroundImage = warmOverlay;
+    coolBtn.style.backgroundImage = "none";
+  }
+  else if(tempType == 'cool'){
+    warmBtn.style.backgroundImage = "none";
+    coolBtn.style.backgroundImage = coolOverlay;
+  }
+  else{
+    warmBtn.style.backgroundImage = "none";
+    coolBtn.style.backgroundImage = "none";
+  }
+
+  document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
+}
 
 // Set preset temperatures
 const defaultSettings = document.querySelector(".default-settings");
-defaultSettings.addEventListener("click", function (e) {});
+defaultSettings.addEventListener("click", function (e) {
+    
+  if(e.target.id == 'cool'){
+    const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+    room.setCurrTemp(room.coldPreset) 
+
+    updateUI(room,e.target.id)
+    //added.changed background color to image and changed the color
+    
+  }
+  if(e.target.id == 'warm'){
+    const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+    room.setCurrTemp(room.warmPreset) 
+    updateUI(room,e.target.id)
+
+  }
+});
 
 // Increase and decrease temperature
 document.getElementById("increase").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const increaseRoomTemperature = room.increaseTemp;
+  //IncreaseTemp would have to be invoked as it is a function
+  const increaseRoomTemperature = room.increaseTemp();
 
   if (room.currTemp < 32) {
-    increaseRoomTemperature();
+    increaseRoomTemperature;
   }
 
-  setIndicatorPoint(room.currTemp);
-  currentTemp.textContent = `${room.currTemp}°`;
-
-  generateRooms();
-
-  setOverlay(room);
-
-  warmBtn.style.backgroundColor = "#d9d9d9";
-  coolBtn.style.backgroundColor = "#d9d9d9";
-
-  document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
+  updateUI(room,'warm')
 });
 
 document.getElementById("reduce").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const decreaseRoomTemperature = room.decreaseTemp;
+  //DecreaseTemp would have to be invoked as it is a function
+  const decreaseRoomTemperature = room.decreaseTemp();
 
   if (room.currTemp > 10) {
-    decreaseRoomTemperature();
+    decreaseRoomTemperature;
   }
 
-  setIndicatorPoint(room.currTemp);
-  currentTemp.textContent = `${room.currTemp}°`;
-
-  generateRooms();
-
-  setOverlay(room);
-
-  warmBtn.style.backgroundColor = "#d9d9d9";
-  coolBtn.style.backgroundColor = "#d9d9d9";
-
-  document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
+  updateUI(room,'cool')
 });
 
 const coolBtn = document.getElementById("cool");
@@ -298,17 +320,22 @@ document.getElementById("save").addEventListener("click", () => {
   const coolInput = document.getElementById("coolInput");
   const warmInput = document.getElementById("warmInput");
   const errorSpan = document.querySelector(".error");
+  //added to remove error message when the temparature values fit the requirement
+  errorSpan.innerText =  ''
 
   if (coolInput.value && warmInput.value) {
     // Validate the data
     if (coolInput.value < 10 || coolInput.value > 25) {
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid cool temperatures (10° - 25°)";
+      //return added to prevent updating the preset when there is an error in the input values
+      return;
     }
 
     if (warmInput.value < 25 || warmInput.value > 32) {
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid warm temperatures (26° - 32°)";
+      return;
     }
     // Validation passed
     // Set current room's presets
