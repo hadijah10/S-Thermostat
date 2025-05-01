@@ -195,14 +195,20 @@ currentTemp.textContent = `${rooms[0].currTemp}°`;
 
 setInitialOverlay();
 
+//creating select options
+function createSelectOptions(room){
+  const option = document.createElement("option");
+  option.value = room.name;
+  option.textContent = room.name;
+  roomSelect.appendChild(option);
+}
+
 document.querySelector(".currentTemp").innerText = `${rooms[0].currTemp}°`;
 // Add new options from rooms array
 rooms.forEach((room) => {
   const option = document.createElement("option");
   //option value correctly set.
-  option.value = room.name;
-  option.textContent = room.name;
-  roomSelect.appendChild(option);
+  createSelectOptions(room)
 });
 
 // Set current temperature to currently selected room
@@ -438,3 +444,4 @@ document.querySelector(".rooms-control").addEventListener("click", (e) => {
     setSelectedRoom(e.target.parentNode.parentNode.id);
   }
 });
+
